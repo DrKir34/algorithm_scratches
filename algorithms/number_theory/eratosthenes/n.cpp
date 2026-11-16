@@ -52,6 +52,23 @@ public:
         return factors;
     }
 
+    // при sqrt(x) <= n
+    std::vector<std::pair<long long, int>> factorize_big(long long x) const {
+        std::vector<std::pair<long long, int>> factors;
+
+        for (int p : primes) {
+            if (1LL * p * p > x) break;
+            if (x % p == 0) {
+                int cnt = 0;
+                while (x % p == 0) { x /= p; ++cnt; }
+                factors.emplace_back(p, cnt);
+            }
+        }
+
+        if (x > 1) factors.emplace_back(x, 1);
+        return factors;
+    }
+
     void printPrimes() const {
         for (int p : primes) {
             std::cout << p << " ";
