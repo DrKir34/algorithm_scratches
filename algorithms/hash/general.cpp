@@ -1,7 +1,11 @@
+#include <vector>
+#include <string>
+using namespace std;
+
 int p, mod;
 std::vector<int> powers;
 
-std::vector<int> compute_hash(const std::string& string) {
+std::vector<int> compute_hash(const std::string& s) {
     int n = s.size();
     std::vector<int> forward_hash(n + 1, 0);
     for (int i = 0; i < n; ++i) {
@@ -10,9 +14,9 @@ std::vector<int> compute_hash(const std::string& string) {
     return forward_hash;
 }
 
-std::vector<int> compute_reverse_hash(const std::string& string) {
+std::vector<int> compute_reverse_hash(const std::string& s) {
     int n = s.size();
-    std::vector<int> backward_hash.resize(n + 1);
+    std::vector<int> backward_hash(n + 1);
     for (int i = n - 1; i >= 0; i--) {
         backward_hash[i] = (backward_hash[i + 1] + (s[i] - 'a' + 1) * powers[n - 1 - i]) % mod;
     }

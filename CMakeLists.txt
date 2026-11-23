@@ -19,4 +19,5 @@ add_executable(algorithm_scratches data_structures/segment-tree/testing/sum.cpp
         data_structures/fenwick/fenwick-in-class.cpp
         data_structures/fenwick/fenwick-in-class-2d.cpp
         data_structures/_strings/Aho-Corasick/static.cpp
+        algorithms/graph/flows/max_flow.cpp
 )
