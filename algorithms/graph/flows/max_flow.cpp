@@ -8,8 +8,8 @@ template <class T> struct simple_queue {
     std::vector<T> payload;
     int pos = 0;
     void reserve(int n) { payload.reserve(n); }
-    int size() const { return int(payload.size()) - pos; }
-    bool empty() const { return pos == int(payload.size()); }
+    int size() const { return (int)payload.size() - pos; }
+    bool empty() const { return pos == (int)payload.size(); }
     void push(const T& t) { payload.push_back(t); }
     T& front() { return payload[pos]; }
     void clear() {
@@ -28,10 +28,10 @@ public:
         assert(0 <= from && from < _n);
         assert(0 <= to && to < _n);
         assert(0 <= cap);
-        int m = int(pos.size());
-        pos.push_back({from, int(g[from].size())});
-        int from_id = int(g[from].size());
-        int to_id = int(g[to].size());
+        int m = (int)pos.size();
+        pos.push_back({from, (int)(g[from].size())});
+        int from_id = (int)(g[from].size());
+        int to_id = (int)(g[to].size());
         if (from == to) to_id++;
         g[from].push_back(_edge{to, to_id, cap});
         g[to].push_back(_edge{from, from_id, 0});
@@ -44,14 +44,14 @@ public:
     };
 
     edge get_edge(int i) {
-        int m = int(pos.size());
+        int m = (int)(pos.size());
         assert(0 <= i && i < m);
         auto _e = g[pos[i].first][pos[i].second];
         auto _re = g[_e.to][_e.rev];
         return edge{pos[i].first, _e.to, _e.cap + _re.cap, _re.cap};
     }
     std::vector<edge> edges() {
-        int m = int(pos.size());
+        int m = (int)(pos.size());
         std::vector<edge> result;
         for (int i = 0; i < m; i++) {
             result.push_back(get_edge(i));
@@ -59,7 +59,7 @@ public:
         return result;
     }
     void change_edge(int i, Cap new_cap, Cap new_flow) {
-        int m = int(pos.size());
+        int m = (int)(pos.size());
         assert(0 <= i && i < m);
         assert(0 <= new_flow && new_flow <= new_cap);
         auto& _e = g[pos[i].first][pos[i].second];
@@ -99,7 +99,7 @@ public:
             if (v == s) return up;
             Cap res = 0;
             int level_v = level[v];
-            for (int& i = iter[v]; i < int(g[v].size()); i++) {
+            for (int& i = iter[v]; i < (int)(g[v].size()); i++) {
                 _edge& e = g[v][i];
                 if (level_v <= level[e.to] || g[e.to][e.rev].cap == 0) continue;
                 Cap d =
